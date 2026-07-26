@@ -1,0 +1,16 @@
+# Cuplikan konfigurasi jcode untuk strict workflow
+# Gabungkan ke ~/.jcode/config.toml atau gunakan sebagai referensi
+
+[features]
+memory = true
+swarm = true
+
+[hooks]
+# Jalankan sebelum commit (gate hijau)
+# before_commit = ["./scripts/gate-green.sh"]
+
+# Setelah turn (enforce ringan)
+# after_turn = ["./scripts/auto-enforce.sh"]
+
+# Contoh lain yang bisa diaktifkan:
+# after_commit = ["./scripts/push-and-pr.sh"]
