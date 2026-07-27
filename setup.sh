@@ -97,8 +97,8 @@ echo "   cd ${TARGET}"
 echo "   jcode"
 echo ""
 echo "4. Coba prompt contoh:"
-echo "   “Migrasi endpoint login ke framework baru”"
-echo "   “Tambah fitur export CSV di balik feature flag”"
+echo '   "Migrasi endpoint login ke framework baru"'
+echo '   "Tambah fitur export CSV di balik feature flag"'
 echo ""
 echo "Agent akan otomatis:"
 echo "  • Deteksi default branch (main atau master)"

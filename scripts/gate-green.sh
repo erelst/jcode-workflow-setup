@@ -15,7 +15,7 @@ if [ -f "Cargo.toml" ]; then
 
     echo "→ cargo clippy..."
     # Clippy: warning tidak ditolak, tapi error harus 0
-    cargo clippy --quiet 2>&1 | grep -q "^error" && { echo "Clippy error!"; exit 1; } || true
+    cargo clippy 2>&1 | grep -q "^error" || { echo "Clippy error!"; exit 1; }
 
     echo "→ cargo test..."
     cargo test --quiet
