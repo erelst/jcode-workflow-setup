@@ -35,7 +35,7 @@ echo "→ Menunggu CI selesai (timeout ${TIMEOUT_MIN} menit)..."
 echo ""
 
 ELAPSED=0
-INTERVAL=10  # detik antar polling
+POLL_INTERVAL=10
 
 while [ $ELAPSED -lt $TIMEOUT_SEC ]; do
   # Ambil run terakhir untuk branch ini
