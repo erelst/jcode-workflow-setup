@@ -28,4 +28,13 @@ if [ ! -f "AGENTS.md" ]; then
   echo "⚠ AGENTS.md tidak ditemukan di root. Workflow strict belum aktif."
 fi
 
+# Cek apakah ada CI yang belum selesai (opsional — informatif)
+DEFAULT_BRANCH=$(detect_default_branch 2>/dev/null || echo "main")
+if [ "${CURRENT}" != "${DEFAULT_BRANCH}" ] && command -v gh &>/dev/null; then
+  LAST_RUN=$(gh run list --branch "${CURRENT}" --limit 1 --json status,conclusion 2>/dev/null || echo "")
+  if echo "${LAST_RUN}" | grep -q "in_progress"; then
+    echo "⚠ CI masih berjalan di branch ini. Jalankan 'scripts/wait-ci.sh' untuk menunggu."
+  fi
+fi
+
 echo "=== [jcode-workflow] Enforce check selesai ==="

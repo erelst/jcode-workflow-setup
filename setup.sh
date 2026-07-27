@@ -43,7 +43,7 @@ mkdir -p "${TARGET}/scripts"
 cp "${SCRIPT_DIR}/scripts/"*.sh "${TARGET}/scripts/" 2>/dev/null || true
 cp "${SCRIPT_DIR}/scripts/"*.md "${TARGET}/scripts/" 2>/dev/null || true
 chmod +x "${TARGET}/scripts/"*.sh 2>/dev/null || true
-echo "  ✓ scripts/ (lib, gate-green, create-branch, push-and-pr, auto-enforce, cleanup-branch, seed-memory-prompt)"
+echo "  ✓ scripts/ (lib, gate-green, create-branch, push-and-pr, wait-ci, auto-enforce, cleanup-branch, seed-memory-prompt)"
 
 # 3. .jcode skill + config snippet
 echo "→ Menyiapkan .jcode/ ..."

@@ -45,6 +45,19 @@
 - Update dokumentasi / AGENTS.md jika ada keputusan arsitektur baru.
 - Setelah traffic lama sudah 0 dan stabil → hapus kode lama + flag (hanya setelah konfirmasi monitoring bersih).
 
+## Wait for CI (wajib)
+- Setelah push ke branch remote (non-trivial), **WAJIB menunggu CI remote selesai**.
+- Gunakan `scripts/wait-ci.sh [timeout_minutes]` untuk blocking sampai CI hijau.
+- Kriteria CI lulus: **0 error, 0 warning** (semua check hijau).
+- Jika CI failed:
+  1. Baca log error (`gh run view --log`)
+  2. Fix penyebab error
+  3. Commit fix + push ulang
+  4. Ulangi sampai CI hijau
+- JANGAN merge PR sebelum CI hijau.
+- JANGAN lanjut ke slice berikutnya jika CI masih merah.
+- Timeout default 15 menit. Sesuaikan jika pipeline CI lama.
+
 ## Branch Management (wajib & otomatis)
 
 ### Deteksi Default Branch
@@ -91,7 +104,9 @@ Jika **SALAH SATU** terpenuhi:
 3. Slice selesai + test 100% hijau
 4. Commit di branch tersebut
 5. Push branch + buat Pull Request
-6. Setelah merge -> hapus branch lokal & remote, kembali ke default branch dan pull
+6. **WAIT: jalankan `scripts/wait-ci.sh` sampai CI hijau (0 error, 0 warning).** Jika gagal → fix → push ulang → tunggu lagi.
+7. Setelah CI hijau → PR siap direview/dimerge
+8. Setelah merge -> hapus branch lokal & remote, kembali ke default branch dan pull
 
 ### Proteksi
 - Jangan pernah force push ke default branch (main/master)
