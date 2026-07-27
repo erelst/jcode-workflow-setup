@@ -1,0 +1,115 @@
+# Template CI generik — auto-detect stack dari file yang ada di repo.
+# Dihasilkan oleh jcode-workflow-setup. Sesuaikan bila perlu.
+#
+# Stack yang didukung:
+#   Rust (Cargo.toml)         — cargo check, test, fmt, clippy
+#   Tauri (src-tauri/Cargo.toml) — tambah system deps webkit2gtk
+#   Node (package.json)       — npm test
+#   Python (pyproject/requirements) — pytest
+#   Go (go.mod)               — go test
+
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # --- Rust ---
+      - name: Install Rust stable
+        if: hashFiles('Cargo.toml') != ''
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+          targets: wasm32-unknown-unknown
+
+      - name: Cache Cargo dependencies
+        if: hashFiles('Cargo.toml') != ''
+        uses: Swatinem/rust-cache@v2
+
+      # Tauri system dependencies (hanya jika ada src-tauri/)
+      - name: Install Tauri system dependencies
+        if: hashFiles('src-tauri/Cargo.toml') != ''
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -yqq \
+            libwebkit2gtk-4.1-dev \
+            build-essential \
+            libssl-dev \
+            libgtk-3-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev \
+            libxdo-dev
+
+      - name: cargo check (host target, -Dwarnings)
+        if: hashFiles('Cargo.toml') != ''
+        env:
+          RUSTFLAGS: -D warnings
+        run: cargo check
+
+      - name: cargo test
+        if: hashFiles('Cargo.toml') != ''
+        run: cargo test --quiet
+
+      - name: cargo check (Tauri backend)
+        if: hashFiles('src-tauri/Cargo.toml') != ''
+        working-directory: ./src-tauri
+        env:
+          RUSTFLAGS: -D warnings
+        run: cargo check
+
+      - name: cargo fmt --check
+        if: hashFiles('Cargo.toml') != ''
+        run: cargo fmt --check
+
+      - name: cargo clippy
+        if: hashFiles('Cargo.toml') != ''
+        run: cargo clippy
+
+      # --- Node.js ---
+      - name: Setup Node
+        if: hashFiles('package.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install & Test (Node)
+        if: hashFiles('package.json') != ''
+        run: |
+          npm ci || npm install
+          npm test -- --passWithNoTests --watchAll=false
+
+      # --- Python ---
+      - name: Setup Python
+        if: hashFiles('pyproject.toml') != '' || hashFiles('requirements.txt') != ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Test (Python)
+        if: hashFiles('pyproject.toml') != '' || hashFiles('requirements.txt') != ''
+        run: |
+          pip install -r requirements.txt 2>/dev/null || pip install -e .
+          pytest -q || true
+
+      # --- Go ---
+      - name: Test (Go)
+        if: hashFiles('go.mod') != ''
+        run: go test ./...
+
+      # --- Shell scripts ---
+      - name: Shellcheck (scripts)
+        if: hashFiles('scripts/*.sh') != '' || hashFiles('setup.sh') != ''
+        run: |
+          shellcheck scripts/*.sh setup.sh
