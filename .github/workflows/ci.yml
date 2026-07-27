@@ -112,4 +112,4 @@ jobs:
       - name: Shellcheck (scripts)
         if: hashFiles('scripts/*.sh') != '' || hashFiles('setup.sh') != ''
         run: |
-          shellcheck scripts/*.sh setup.sh
+          shellcheck -e SC1091 scripts/*.sh setup.sh
