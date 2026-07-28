@@ -26,10 +26,14 @@ Gunakan skill ini otomatis ketika mendeteksi tugas migrasi framework, refactor b
    - Kerjakan per vertical slice kecil.
    - Setelah setiap slice: jalankan test → perbaiki sampai hijau.
 
-6. **Commit & PR**
+6. **Commit, Push, then CI → offer options**
    - Hanya commit jika test hijau.
    - Gunakan conventional commits.
-   - Push + buat PR dengan base = default branch yang terdeteksi.
+   - Push branch ke remote (tanpa auto-PR).
+   - Tunggu CI hijau.
+   - Tawarkan 2 opsi ke user:
+     * **Opsi A — PR**: jika user setuju, buat PR via `scripts/create-pr.sh`.
+     * **Opsi B — Merge langsung**: jika user pilih, merge via `scripts/merge-to-default.sh`.
 
 7. **Cleanup**
    - Setelah merge & stabil → hapus kode lama + flag (jika sudah tidak dipakai).

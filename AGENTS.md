@@ -103,10 +103,12 @@ Jika **SALAH SATU** terpenuhi:
 2. Buat branch baru: `git checkout -b type/nama`
 3. Slice selesai + test 100% hijau
 4. Commit di branch tersebut
-5. Push branch + buat Pull Request
+5. Push branch ke remote: `scripts/push.sh` (tidak auto-create PR)
 6. **WAIT: jalankan `scripts/wait-ci.sh` sampai CI hijau (0 error, 0 warning).** Jika gagal → fix → push ulang → tunggu lagi.
-7. Setelah CI hijau → PR siap direview/dimerge
-8. Setelah merge -> hapus branch lokal & remote, kembali ke default branch dan pull
+7. Setelah CI hijau → **tawarkan 2 opsi ke user**:
+   - **Opsi A — Buat PR**: tunggu approval user dulu. Jika user menyatakan "approved" / "setuju" / "lanjut PR", agent otomatis buat PR via `scripts/create-pr.sh`.
+   - **Opsi B — Merge langsung**: jika user memilih merge langsung ke default branch, agent langsung merge + push tanpa PR via `scripts/merge-to-default.sh`.
+8. Setelah merge (via PR atau langsung) → hapus branch lokal & remote, kembali ke default branch dan pull
 
 ### Proteksi
 - Jangan pernah force push ke default branch (main/master)

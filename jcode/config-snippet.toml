@@ -13,4 +13,4 @@ swarm = true
 # after_turn = ["./scripts/auto-enforce.sh"]
 
 # Contoh lain yang bisa diaktifkan:
-# after_commit = ["./scripts/push-and-pr.sh"]
+# after_commit = ["./scripts/push.sh"]   # push saja, PR manual via scripts/create-pr.sh

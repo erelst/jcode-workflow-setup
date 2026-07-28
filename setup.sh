@@ -43,7 +43,7 @@ mkdir -p "${TARGET}/scripts"
 cp "${SCRIPT_DIR}/scripts/"*.sh "${TARGET}/scripts/" 2>/dev/null || true
 cp "${SCRIPT_DIR}/scripts/"*.md "${TARGET}/scripts/" 2>/dev/null || true
 chmod +x "${TARGET}/scripts/"*.sh 2>/dev/null || true
-echo "  ✓ scripts/ (lib, gate-green, create-branch, push-and-pr, wait-ci, auto-enforce, cleanup-branch, seed-memory-prompt)"
+echo "  ✓ scripts/ (lib, gate-green, create-branch, push, create-pr, merge-to-default, wait-ci, auto-enforce, cleanup-branch, seed-memory-prompt)"
 
 # 3. .jcode skill + config snippet
 echo "→ Menyiapkan .jcode/ ..."
@@ -89,7 +89,7 @@ echo "     after_turn    = [\"${TARGET}/scripts/auto-enforce.sh\"]"
 echo ""
 echo "   • Atau copy isi .jcode/config-snippet.toml ke config kamu."
 echo ""
-echo "2. Pastikan GitHub CLI (gh) terinstall jika ingin auto-PR:"
+echo "2. Pastikan GitHub CLI (gh) terinstall jika ingin manual PR:"
 echo "   brew install gh   # atau lihat https://cli.github.com"
 echo ""
 echo "3. Jalankan jcode di project ini:"
@@ -106,7 +106,8 @@ echo "  • Buat feature branch yang benar"
 echo "  • Buat characterization test jika belum ada"
 echo "  • Pakai feature flag"
 echo "  • Test sampai hijau"
-echo "  • Commit + push + buat PR"
+echo "  • Commit + push"
+echo "  • PR otomatis setelah user approve"
 echo "  • Spawn swarm jika tugas besar"
 echo ""
 echo "Selamat coding tanpa mikir lagi 🚀"

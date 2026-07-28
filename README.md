@@ -89,7 +89,9 @@ jcode-workflow-setup/
 │   ├── lib.sh                # Helper deteksi main/master
 │   ├── gate-green.sh         # Hanya boleh commit kalau hijau
 │   ├── create-branch.sh      # Buat branch bersih dari default
-│   ├── push-and-pr.sh        # Push + buat PR otomatis
+│   ├── push.sh               # Push branch ke remote (tanpa auto-PR)
+│   ├── create-pr.sh          # Buat PR setelah user approve
+│   ├── merge-to-default.sh   # Merge langsung ke default branch
 │   ├── auto-enforce.sh       # Enforce ringan setelah turn
 │   ├── cleanup-branch.sh     # Hapus branch setelah merge
 │   └── seed-memory-prompt.md # Prompt sekali jalan: seed aturan ke memory jcode
