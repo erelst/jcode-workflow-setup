@@ -54,7 +54,14 @@ brew install gh
 gh auth login
 ```
 
-3. Masuk ke proyek dan jalankan:
+3. **Seed memory ke jcode** (wajib sekali setelah setup):
+   Copy-paste isi `scripts/seed-memory-prompt.md` ke chat jcode.
+   Ini akan menyimpan aturan workflow ke persistent memory jcode agar:
+   - Memory ter-recall otomatis berdasarkan konteks file/fungsi/konsep
+   - Agent memberi peringatan jika area yang diproteksi tersentuh
+   - Anti-regresi aktif
+
+4. Masuk ke proyek dan jalankan:
 ```bash
 cd /path/ke/proyek
 jcode
