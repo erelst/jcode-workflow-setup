@@ -103,7 +103,7 @@ jcode-workflow-setup/
 │   ├── auto-enforce.sh       # Enforce ringan setelah turn
 │   ├── cleanup-branch.sh     # Hapus branch setelah merge
 │   └── seed-memory-prompt.md # Prompt sekali jalan: seed aturan ke memory jcode
-├── .jcode/
+├── jcode/
 │   ├── config-snippet.toml   # Contoh hooks
 │   └── skills/
 │       └── strict-workflow/
