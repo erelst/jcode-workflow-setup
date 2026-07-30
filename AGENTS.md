@@ -165,6 +165,10 @@ Gunakan format:
   - Tampilkan peringatan ke user: "File ini memiliki area yang diproteksi: <...>. Apakah tetap lanjut?"
   - Tunggu konfirmasi user sebelum melanjutkan.
 - Jika user mengabaikan peringatan, catat di memory bahwa override telah terjadi.
+- **Setelah user mengkonfirmasi override dan perubahan di-commit/merge ke main**: REPLACE old PROTECTED memory dengan data baru yang mencerminkan kode hasil perubahan.
+  - Gunakan `memory remember` dengan judul PROTECTED yang sama (scope=project) — ini otomatis menimpa entry lama.
+  - Isi: files, what/why, risk areas, trade-offs, tags yang BARU (sesuai hasil perubahan).
+  - Tujuannya: memory selalu sinkron dengan kode sebenarnya, tidak pakai data basi.
 
 ### Contoh mekanisme
 ```

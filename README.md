@@ -42,17 +42,17 @@ Script `setup.sh` akan:
 
 1. **Aktifkan hooks** di `~/.jcode/config.toml`:
 
-```toml
-[hooks]
-before_commit = ["/path/ke/proyek/scripts/gate-green.sh"]
-after_turn    = ["/path/ke/proyek/scripts/auto-enforce.sh"]
-```
+   ```toml
+   [hooks]
+   before_commit = ["/path/ke/proyek/scripts/gate-green.sh"]
+   after_turn    = ["/path/ke/proyek/scripts/auto-enforce.sh"]
+   ```
 
 2. (Opsional) Install GitHub CLI untuk membuat PR:
-```bash
-brew install gh
-gh auth login
-```
+   ```bash
+   brew install gh
+   gh auth login
+   ```
 
 3. **Seed memory ke jcode** (wajib sekali setelah setup):
    ```
@@ -60,10 +60,10 @@ gh auth login
    ```
 
 4. Masuk ke proyek dan jalankan:
-```bash
-cd /path/ke/proyek
-jcode
-```
+   ```bash
+   cd /path/ke/proyek
+   jcode
+   ```
 
 ## Penanganan main vs master
 

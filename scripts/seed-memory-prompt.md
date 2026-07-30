@@ -55,6 +55,12 @@ Setelah merge/commit ke main:
    ```
 2. Scope: project. Tags: path file, nama fungsi, konsep domain.
 
+Setelah user mengkonfirmasi override protected area dan perubahan di-commit/merge ke main:
+1. Old PROTECTED memory sudah basi (tidak mencerminkan kode sebenarnya).
+2. Panggil `memory remember` dengan judul PROTECTED yang SAMA (scope=project) — ini otomatis menimpa entry lama.
+3. Isi dengan data BARU: files yang berubah, what/why, risk areas baru, trade-offs baru.
+4. Tujuannya: memory selalu sinkron dengan kode, bukan data basi.
+
 Ingat: tags harus granular (path file, function names, konsep spesifik) agar recall berdasarkan konteks alami bekerja — bukan hardcode keyword buatan.
 
 Konfirmasi setelah semua memory tersimpan.
