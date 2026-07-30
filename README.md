@@ -2,17 +2,20 @@
 
 **Strict Zero-Thinking Workflow** untuk jcode + Git.
 
-Repository ini berisi semua aturan, script, skill, dan template yang dibutuhkan agar jcode bekerja secara **otomatis total**:
+Repository ini berisi aturan, script, skill, dan template untuk **strict zero-thinking workflow** jcode:
 
 - Ontologi domain dulu + pahami *kenapa* kode lama ditulis begitu
 - Larangan blind override / rewrite buta
 - Characterization test dulu sebelum ubah kode
 - Feature flag & Strangler Fig untuk migrasi/refactor
-- Hanya commit kalau test hijau
-- Branch management otomatis (deteksi `main` **atau** `master` + feature branch + PR)
+- **Tidak ada commit/push otomatis** — agent tawarkan opsi setelah test hijau
+- Trivial: 2 opsi (commit langsung / review feedback)
+- Non-trivial: 3 opsi (merge langsung / PR / review feedback)
+- Loop review/feedback sampai user memutuskan
+- Simpan memory setelah merge ke main untuk cegah regresi
+- Branch management otomatis (deteksi `main` atau `master`)
 - Swarm otomatis untuk tugas besar
 - Auto-create test framework / CI / flag system jika belum ada
-- Tidak perlu prompt pengingat lagi
 
 ## Cara Pakai (Setup ke Proyek Target)
 
@@ -45,7 +48,7 @@ before_commit = ["/path/ke/proyek/scripts/gate-green.sh"]
 after_turn    = ["/path/ke/proyek/scripts/auto-enforce.sh"]
 ```
 
-2. (Opsional) Install GitHub CLI untuk auto-PR:
+2. (Opsional) Install GitHub CLI untuk membuat PR:
 ```bash
 brew install gh
 gh auth login
@@ -76,7 +79,7 @@ Cukup bilang:
 - `Tambah fitur export PDF di dashboard`
 - `Perbaiki bug di endpoint /orders`
 
-Agent akan otomatis menangani branch, test, flag, commit, PR, swarm, dll.
+Agent akan otomatis menangani branch, test, flag, review loop, swarm, dll — tetapi commit/push/PR tetap butuh keputusan user.
 
 ## Isi Repository
 
@@ -107,8 +110,10 @@ jcode-workflow-setup/
 ## Prinsip Desain
 
 - **Incremental** (Strangler Fig + vertical slice)
-- **Safety-first** (characterization → test hijau → baru commit)
-- **Otomatis** (agent memutuskan sendiri branch, swarm, flag, dll)
+- **Safety-first** (characterization → test hijau → loop feedback)
+- **Local-first** (tidak ada commit/push otomatis, agent tawarkan opsi)
+- **Memory protection** (simpan perubahan penting, beri peringatan jika tersentuh)
+- **Otomatis** (agent memutuskan sendiri branch, swarm, flag, review loop, dll)
 - **Zero reminder** (semua aturan ada di AGENTS.md + hooks)
 - **Default-branch aware** (main atau master)
 
