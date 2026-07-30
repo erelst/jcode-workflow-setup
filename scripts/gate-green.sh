@@ -1,24 +1,35 @@
 #!/usr/bin/env bash
 # Gate: hanya boleh commit jika test hijau.
-# Juga cek fmt & clippy untuk Rust (warning=allowed, error=ditolak).
-# Dipanggil via jcode hook before_commit / before_push
+# Meniru langkah-langkah CI (GitHub Actions) untuk deteksi dini kegagalan.
+# Auto-detect stack dari file proyek (Cargo.toml, package.json, dll)
 
 set -euo pipefail
 
 echo "=== [jcode-workflow] Gate: memeriksa apakah test hijau ==="
 
-# ---------- Rust ----------
-if [ -f "Cargo.toml" ]; then
+# ---------- Rust (+ Tauri) ----------
+if [ -f "Cargo.toml" ] || [ -f "src-tauri/Cargo.toml" ]; then
   if command -v cargo >/dev/null 2>&1; then
-    echo "→ cargo fmt --check..."
-    cargo fmt --check
+    # Root cargo check (jika ada Cargo.toml)
+    if [ -f "Cargo.toml" ]; then
+      echo "→ cargo check (--Dwarnings)..."
+      RUSTFLAGS="-D warnings" cargo check 2>&1
 
-    echo "→ cargo clippy..."
-    # Clippy: warning tidak ditolak, tapi error harus 0
-    cargo clippy 2>&1 | grep -q "^error" || { echo "Clippy error!"; exit 1; }
+      echo "→ cargo fmt --check..."
+      cargo fmt --check
 
-    echo "→ cargo test..."
-    cargo test --quiet
+      echo "→ cargo clippy..."
+      cargo clippy 2>&1
+
+      echo "→ cargo test..."
+      cargo test --quiet
+    fi
+
+    # Tauri backend check (jika ada src-tauri/Cargo.toml)
+    if [ -f "src-tauri/Cargo.toml" ]; then
+      echo "→ cargo check Tauri backend (--Dwarnings)..."
+      RUSTFLAGS="-D warnings" cargo check --manifest-path src-tauri/Cargo.toml 2>&1
+    fi
   fi
   exit 0
 fi
@@ -26,6 +37,9 @@ fi
 # ---------- Node ----------
 if [ -f "package.json" ]; then
   if command -v npm >/dev/null 2>&1; then
+    echo "→ npm ci (atau npm install)..."
+    npm ci 2>/dev/null || npm install
+
     echo "→ npm test..."
     npm test -- --passWithNoTests --watchAll=false 2>/dev/null || npm test -- --passWithNoTests
   elif command -v yarn >/dev/null 2>&1; then
@@ -37,8 +51,11 @@ if [ -f "package.json" ]; then
 fi
 
 # ---------- Python ----------
-if [ -f "pytest.ini" ] || [ -f "pyproject.toml" ] || [ -f "setup.py" ] || [ -d "tests" ]; then
+if [ -f "pytest.ini" ] || [ -f "pyproject.toml" ] || [ -f "setup.py" ] || [ -f "requirements.txt" ] || [ -d "tests" ]; then
   if command -v pytest >/dev/null 2>&1; then
+    echo "→ pip install..."
+    pip install -r requirements.txt 2>/dev/null || pip install -e . 2>/dev/null || true
+
     echo "→ pytest..."
     pytest -q --tb=no
   elif python -m pytest --version >/dev/null 2>&1; then
