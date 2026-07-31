@@ -74,7 +74,7 @@ Paste prompt berikut ke chat jcode:
 Setup CodeGraph dan Ponytail untuk jcode:
 - CodeGraph: https://github.com/colbymchenry/codegraph
 - Ponytail: https://github.com/DietrichGebert/ponytail
-Baca kedua repo tersebut, lalu aktifkan CodeGraph MCP dan Ponytail skill
+Baca kedua repo tersebut, lalu install dan aktifkan CodeGraph MCP dan Ponytail skill
 sesuai rekomendasi penggunaannya masing-masing.
 ```
 

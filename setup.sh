@@ -97,7 +97,7 @@ echo ""
 echo '   "Setup CodeGraph dan Ponytail untuk jcode:'
 echo '    - CodeGraph: https://github.com/colbymchenry/codegraph'
 echo '    - Ponytail: https://github.com/DietrichGebert/ponytail'
-echo '    Baca kedua repo tersebut, lalu aktifkan CodeGraph MCP dan Ponytail skill'
+echo '    Baca kedua repo tersebut, lalu install dan aktifkan CodeGraph MCP dan Ponytail skill'
 echo '    sesuai rekomendasi penggunaannya masing-masing."'
 echo ""
 echo "4. Jalankan jcode di project ini:"
