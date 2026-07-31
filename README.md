@@ -65,6 +65,23 @@ Script `setup.sh` akan:
    jcode
    ```
 
+## Setup Opsional: CodeGraph & Ponytail
+
+Tambahkan CodeGraph MCP dan Ponytail skill ke jcode secara opsional.
+Paste prompt berikut ke chat jcode:
+
+```
+Setup CodeGraph dan Ponytail untuk jcode:
+- CodeGraph: https://github.com/colbymchenry/codegraph
+- Ponytail: https://github.com/DietrichGebert/ponytail
+Baca kedua repo tersebut, lalu aktifkan CodeGraph MCP dan Ponytail skill
+sesuai rekomendasi penggunaannya masing-masing.
+```
+
+Kegunaan:
+- **CodeGraph** — knowledge graph kode (pre-indexed), eksplorasi struktur, call paths, impact analysis sebelum edit. Lebih sedikit tool calls.
+- **Ponytail** — kode seminimal mungkin (YAGNI), review over-engineering, audit repo. Lebih sedikit kode, biaya, dan waktu.
+
 ## Penanganan main vs master
 
 Semua script otomatis mendeteksi default branch:

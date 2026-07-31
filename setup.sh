@@ -92,11 +92,19 @@ echo ""
 echo "2. Pastikan GitHub CLI (gh) terinstall jika ingin manual PR:"
 echo "   brew install gh   # atau lihat https://cli.github.com"
 echo ""
-echo "3. Jalankan jcode di project ini:"
+echo "3. (OPSIONAL) Setup CodeGraph & Ponytail — paste prompt ini ke chat jcode:"
+echo ""
+echo '   "Setup CodeGraph dan Ponytail untuk jcode:'
+echo '    - CodeGraph: https://github.com/colbymchenry/codegraph'
+echo '    - Ponytail: https://github.com/DietrichGebert/ponytail'
+echo '    Baca kedua repo tersebut, lalu aktifkan CodeGraph MCP dan Ponytail skill'
+echo '    sesuai rekomendasi penggunaannya masing-masing."'
+echo ""
+echo "4. Jalankan jcode di project ini:"
 echo "   cd ${TARGET}"
 echo "   jcode"
 echo ""
-echo "4. Coba prompt contoh:"
+echo "5. Coba prompt contoh:"
 echo '   "Migrasi endpoint login ke framework baru"'
 echo '   "Tambah fitur export CSV di balik feature flag"'
 echo ""
