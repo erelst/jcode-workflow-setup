@@ -27,6 +27,11 @@ Simpan sebagai persistent memory (project-scoped) dengan struktur berikut:
 
 7. **Feature flag wajib** untuk fitur baru (default OFF).
 
+8. **CodeGraph & Ponytail (wajib jika tersedia)**:
+   - CodeGraph MCP (https://github.com/colbymchenry/codegraph): WAJIB dipakai untuk eksplorasi struktur kode, trace callers/callees, impact analysis SEBELUM edit.
+   - Ponytail skill (https://github.com/DietrichGebert/ponytail): WAJIB dipakai untuk menulis kode minimal (YAGNI) + review over-engineering.
+   - Jika keduanya tidak tersedia → lanjut tool bawaan, jangan blokir kerja.
+
 ### Tags untuk context recall (jangan hardcode, gunakan konteks):
 - Semua aturan di atas → "workflow", "agents.md", "strict-workflow"
 - Memory protection → "no-blind-override", "protected-area", "risk-area", "regression-protection"
@@ -34,6 +39,8 @@ Simpan sebagai persistent memory (project-scoped) dengan struktur berikut:
 - No auto commit → "local-first", "no-auto-commit", "offer-options", "user-approval"
 - Review loop → "review-feedback-loop", "feedback-loop"
 - Feature flag → "feature-flag", "strangler-fig", "adapter"
+- CodeGraph → "codegraph", "codegraph-explore", "impact-analysis", "callers-callees"
+- Ponytail → "ponytail", "yagni", "minimal-code", "over-engineering"
 
 ### Prompt context-trigger (untuk auto-recall):
 

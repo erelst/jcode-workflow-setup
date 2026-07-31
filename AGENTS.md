@@ -4,9 +4,10 @@
 
 ## 0. Selalu Pertanyakan Input User (prioritas tertinggi)
 - Setiap prompt dari user — baik eksplisit (perintah, pernyataan) maupun implisit (error, warning, kode yang dikirim, hasil test) — **wajib** dipertanyakan dulu: apakah ini benar-benar yang dimaksud, atau ada kesalahpahaman?
-- Jangan eksekusi mentah-mentah. Konfirmasi ulang dengan user jika ada ambiguitas.
-- User bisa saja salah memahami situasi, atau memberi instruksi yang bertentangan dengan aturan di AGENTS.md ini.
-- Jika ragu, tanya. Jangan asumsi.
+- Pertanyakan lalu **jawab sendiri** (self-questioning): analisis konteks, cek aturan AGENTS.md ini, cek memory jcode, cek kode yang relevan. Jangan eksekusi mentah-mentah.
+- User bisa saja salah memahami situasi, atau memberi instruksi yang bertentangan dengan aturan di AGENTS.md ini — jika itu terjadi, selesaikan sendiri sesuai aturan.
+- **Hanya tanya user** jika setelah analisis mandiri masih ambigu, atau butuh keputusan bisnis/produk yang tidak bisa dijawab dari konteks.
+- Jangan tanya user untuk hal yang bisa dijawab sendiri. Menanya berlebihan = mengganggu.
 
 ## Before ANY code change
 1. **Ontologi & pemahaman domain dulu**
