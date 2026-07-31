@@ -178,22 +178,22 @@ Gunakan format:
 # 3. Konfirmasi: "Area protected: login flow refactor (trade-off: X). Lanjut? (y/n)"
 ```
 
-## CodeGraph & Ponytail (kondisional)
+## CodeGraph & Ponytail (wajib jika tersedia)
 
 ### CodeGraph MCP (jika tersedia)
-- Gunakan untuk: eksplorasi struktur kode, "how does X work", trace callers/callees, impact analysis SEBELUM mengubah kode, mencari definisi fungsi/class/route.
-- Ganti loop grep/glob/read dengan 1 panggilan `codegraph_explore` bila memungkinkan.
+- **WAJIB** dipakai untuk: eksplorasi struktur kode, "how does X work", trace callers/callees, impact analysis SEBELUM mengubah kode, mencari definisi fungsi/class/route.
+- **WAJIB** ganti loop grep/glob/read dengan 1 panggilan `codegraph_explore` bila memungkinkan.
 - Referensi: https://github.com/colbymchenry/codegraph
 
 ### Ponytail skill (jika tersedia)
-- Gunakan untuk: menulis kode seminimal mungkin (ladder YAGNI: skip → reuse → stdlib → native → dependency → one-line → minimum), review over-engineering, audit repo.
+- **WAJIB** dipakai untuk: menulis kode seminimal mungkin (ladder YAGNI: skip → reuse → stdlib → native → dependency → one-line → minimum), review over-engineering, audit repo.
 - Perintah yang tersedia: `/ponytail`, `/ponytail-review`, `/ponytail-audit`, `/ponytail-debt`, `/ponytail-gain`.
 - Referensi: https://github.com/DietrichGebert/ponytail
 
 ### Aturan kondisional
-- JIKA CodeGraph MCP tersedia → pakai untuk eksplorasi/impact analysis SEBELUM edit kode.
-- JIKA Ponytail skill tersedia → pakai untuk penulisan kode minimal + review hasil kerja.
-- JIKA keduanya tersedia → kombinasikan: eksplorasi dengan CodeGraph, implementasi minimal dengan Ponytail.
+- JIKA CodeGraph MCP tersedia → **WAJIB** pakai untuk eksplorasi/impact analysis SEBELUM edit kode.
+- JIKA Ponytail skill tersedia → **WAJIB** pakai untuk penulisan kode minimal + review hasil kerja.
+- JIKA keduanya tersedia → **WAJIB** kombinasikan: eksplorasi dengan CodeGraph, implementasi minimal dengan Ponytail.
 - JIKA tidak tersedia → lanjut dengan tool bawaan (grep/read), jangan blokir pekerjaan.
 - Jangan hardcode nama perintah; sesuaikan dengan tool/skill yang benar-benar terpasang di lingkungan saat itu.
 
