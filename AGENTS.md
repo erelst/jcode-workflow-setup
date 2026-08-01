@@ -65,6 +65,7 @@
 ### Aturan Kerja — Local First, No Auto Commit/Push
 
 Terdapat dua jalur — **trivial** dan **non-trivial**. Keduanya TIDAK otomatis commit/push.
+- Saat menawarkan opsi (trivial maupun non-trivial), gunakan format di `templates/offer-options.md`.
 
 #### Kriteria Trivial
 Perubahan yang memenuhi **SEMUA**:
