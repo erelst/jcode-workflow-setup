@@ -158,6 +158,7 @@ Gunakan format:
 - What: <ringkasan>
 - Rationale: <kenapa>
 - Risk areas: <area fragile / invariant>
+- Indirect deps: <callers, importers, fungsi yang bergantung>
 - Trade-offs: <apa yang dikorbankan>
 - Tags: <file path, function names, domain concepts>
 ```
@@ -166,6 +167,7 @@ Gunakan format:
 - Sebelum mengubah file APAPUN, lakukan `memory recall` dengan query yang relevan (path file, nama fungsi, konsep domain).
 - Jika file/fungsi/konsep yang akan disentuh ADA di memory yang diproteksi:
   - Tampilkan peringatan ke user: "File ini memiliki area yang diproteksi: <...>. Apakah tetap lanjut?"
+  - **Deteksi juga hubungan tak langsung**: sebelum konfirmasi, trace callers/callees, importers, dan siapa saja yang bergantung pada kode yang akan diubah (gunakan `codegraph_explore`, grep `use`/`import`/call sites, atau tool impact analysis). Jika ada hubungan tak langsung yang signifikan → tampilkan juga di peringatan ke user.
   - Tunggu konfirmasi user sebelum melanjutkan.
 - Jika user mengabaikan peringatan, catat di memory bahwa override telah terjadi.
 - **Setelah user mengkonfirmasi override dan perubahan di-commit/merge ke main**: REPLACE old PROTECTED memory dengan data baru yang mencerminkan kode hasil perubahan.
