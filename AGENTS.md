@@ -65,7 +65,31 @@
 ### Aturan Kerja — Local First, No Auto Commit/Push
 
 Terdapat dua jalur — **trivial** dan **non-trivial**. Keduanya TIDAK otomatis commit/push.
-- Saat menawarkan opsi (trivial maupun non-trivial), gunakan format di `templates/offer-options.md`.
+- Saat menawarkan opsi (trivial maupun non-trivial), gunakan format ini:
+
+```
+## Verifikasi
+- [ ] Test lokal hijau
+- [ ] <verifikasi lain yang sudah dilalui>
+
+## Perubahan yang dilakukan
+- <file> — <apa yang diubah + kenapa>
+
+## Status branch <nama-branch> (<N> commit)
+- <hash7> <oneline commit>
+
+## Opsi selanjutnya
+- **A** — <opsi A>
+- **B** — <opsi B>
+- **C** — <opsi C>   (hanya non-trivial)
+
+**Pilih mana?**
+```
+
+Catatan:
+- Non-trivial: A = merge langsung, B = PR, C = review/feedback (loop sampai A atau B).
+- Trivial: A = commit langsung, B = review/feedback (loop sampai A).
+- "Perubahan yang dilakukan" wajib diisi.
 
 #### Kriteria Trivial
 Perubahan yang memenuhi **SEMUA**:
