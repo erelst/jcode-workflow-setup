@@ -40,6 +40,7 @@
 - Setiap slice selesai → jalankan full relevant test suite.
 - Test GAGAL → perbaiki sendiri sampai 100% hijau. JANGAN lanjut, JANGAN commit.
 - **TIDAK ADA commit/push otomatis.** Baik trivial maupun non-trivial, agent WAJIB menawarkan opsi ke user setelah test lokal hijau. Lihat Branch Management.
+- **Cleanup artefak temporary**: Sebelum commit/merge, hapus file artefak temporary yang dibuat selama pengerjaan di branch tersebut (log debug, file test sementara, snippet output, file backup, dsb). Artefak yang dimaksud adalah file yang TIDAK merupakan bagian dari deliverable akhir. Jangan menghapus file yang memang diperlukan oleh project.
 - Gunakan todo tool + confidence score. Jangan claim "selesai" jika confidence < 90 atau test belum hijau.
 - Auto-create missing pieces:
   - Jika test framework belum ada → install & setup sendiri (sesuaikan stack).
@@ -115,7 +116,8 @@ Jika **SALAH SATU** terpenuhi:
 1. Pastikan default branch terbaru
 2. Buat branch baru: `git checkout -b type/nama`
 3. Slice selesai + test lokal 100% hijau
-4. **Tawarkan 3 opsi ke user**:
+4. **Cleanup artefak temporary**: Hapus file artefak temporary (log debug, file test sementara, snippet output, file backup, dsb). Artefak = file yang TIDAK merupakan bagian dari deliverable akhir.
+5. **Tawarkan 3 opsi ke user**:
    - **Opsi A — Merge langsung ke main**: Agent jalankan `scripts/merge-to-default.sh`
      - Checkout & update default branch
      - Merge branch lokal (--no-ff)
@@ -132,12 +134,13 @@ Jika **SALAH SATU** terpenuhi:
      - Agent analisis feedback → edit kode → jalankan test lokal
      - Setelah test lokal hijau → tampilkan 3 opsi INI LAGI
      - **Loop terus sampai user memilih Opsi A atau B**
-5. Setelah merge (via A atau B) → hapus branch remote, kembali ke default branch dan pull
+6. Setelah merge (via A atau B) → hapus branch remote, kembali ke default branch dan pull
 
 #### Alur Trivial
 
 1. Perubahan selesai + test lokal 100% hijau
-2. **Tawarkan 2 opsi ke user**:
+2. **Cleanup artefak temporary**: Hapus file artefak temporary (log debug, file test sementara, snippet output, file backup, dsb). Artefak = file yang TIDAK merupakan bagian dari deliverable akhir.
+3. **Tawarkan 2 opsi ke user**:
    - **Opsi A — Commit langsung**: Commit ke default branch, push.
      - **Simpan memory** (lihat Memory Protection)
    - **Opsi B — Review / feedback / test manual dari user**:
