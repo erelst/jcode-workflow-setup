@@ -37,7 +37,7 @@ git checkout "${DEFAULT_BRANCH}"
 git pull origin "${DEFAULT_BRANCH}" 2>/dev/null || true
 
 echo "→ Merge ${CURRENT_BRANCH} ke ${DEFAULT_BRANCH}..."
-git merge "${CURRENT_BRANCH}" --no-ff -m "feat: merge ${CURRENT_BRANCH} to ${DEFAULT_BRANCH}"
+git merge "${CURRENT_BRANCH}" --no-ff -m "merge: gabungkan ${CURRENT_BRANCH} ke ${DEFAULT_BRANCH}"
 
 # Tanya user untuk push
 read -r -p "→ Push ${DEFAULT_BRANCH} ke remote? (y/N): " PUSH_ANSWER

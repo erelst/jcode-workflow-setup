@@ -120,7 +120,7 @@ Jika **SALAH SATU** terpenuhi:
 5. **Tawarkan 3 opsi ke user**:
    - **Opsi A — Merge langsung ke main**: Agent jalankan `scripts/merge-to-default.sh`
      - Checkout & update default branch
-     - Merge branch lokal (--no-ff)
+     - Merge branch lokal (--no-ff) — **jangan duplikasi pesan commit** (lihat Proteksi)
      - **Tanya user**: "Push ke remote?" Jika ya → push. Jika tidak → merge lokal saja.
      - Hapus branch lokal
      - **Simpan memory** (lihat Memory Protection)
@@ -153,6 +153,8 @@ Jika **SALAH SATU** terpenuhi:
 - Jangan pernah force push ke default branch (main/master)
 - Jangan merge ke default branch jika test masih merah
 - Jika konflik → resolve sendiri, test ulang sampai hijau, baru lanjut
+- **Larangan duplikasi pesan commit pada merge**: Saat `git merge --no-ff`, DILARANG menggunakan teks pesan commit (`-m`) yang persis sama dengan judul commit fitur di branch tersebut. Opsi yang benar: (a) gunakan prefix deskriptif seperti `merge(scope): gabungkan <nama-fitur>`, atau (b) biarkan Git menggunakan pesan merge standar otomatis tanpa flag `-m` custom.
+  - Script `scripts/merge-to-default.sh` sudah menggunakan format: `merge: gabungkan <branch> ke <default>`
 
 ## Wait for CI (wajib — untuk Opsi B dan merge langsung yang di-push)
 - Setelah push ke branch remote (via Opsi B atau Opsi A yang di-push), **WAJIB menunggu CI remote selesai** jika ada.
